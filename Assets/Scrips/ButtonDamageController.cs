@@ -1,18 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ButtonDamageController : MonoBehaviour
+public class ButtonDamageController : MonoBehaviour, IPointerClickHandler
 {
     #region Fields
 
-    #endregion
+    [SerializeField]
+    private float _damage = 10;
 
-
-    #region Propierties
-
-    #endregion
-
-
-    #region Events
+    private LifeBehaviour _lifeBehaviour;
 
     #endregion
 
@@ -21,43 +17,18 @@ public class ButtonDamageController : MonoBehaviour
 
     private void Awake()
     {
-        
-    }
-
-    private void OnEnable()
-    {
-        
-    }
-
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
-
-    private void OnDisable()
-    {
-        
+        _lifeBehaviour = FindObjectOfType<LifeBehaviour>();
     }
 
     #endregion
 
 
-    #region Private Methods
+    #region Interface Methods
 
-    #endregion
-
-
-    #region Public Methods
-
-    #endregion
-
-
-    #region Corroutines
+    void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
+    {
+        _lifeBehaviour.TakeDamage(_damage);
+    }
 
     #endregion
 }
